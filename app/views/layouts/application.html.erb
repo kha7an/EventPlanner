@@ -6,10 +6,34 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= javascript_importmap_tags %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
+
+
+  <% if user_signed_in? %>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="/users/edit" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+         aria-expanded="false">
+        <%= current_user.name || current_user.email%>
+      </a>
+    <li>
+      <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+         aria-expanded="false">
+        <%= "Главная" %>
+      </a>
+    </li>
+        <li><%= link_to 'Выход', destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </li>
+  <% else %>
+    <li class="nav-item"><%= link_to 'Вход', new_user_session_path, class: 'btn btn-primary me-2' %></li>
+    <li class="nav-item"><%= link_to 'Регистрация', new_user_registration_path, class: 'btn btn-light' %></li>
+  <% end %>
+
     <%= yield %>
   </body>
 </html>

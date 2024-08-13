@@ -1,0 +1,15 @@
+<h2>Все мероприятия</h2>
+<%= link_to 'Создать', new_event_path, class: 'btn btn-secondary me-2' %>
+<br>
+<br>
+<br>
+
+<% @events.each do |event| %>
+  <div>
+    <hr>
+    <%= event.organizer.name %><br>
+  <%= link_to event.title, event %><br>
+  <%= link_to event.description, event %>
+    <hr>
+  </div>
+<% end %>
