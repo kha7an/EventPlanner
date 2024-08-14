@@ -1,20 +1,29 @@
 <h2>Просмотр мероприятия</h2>
-<p>Создано: <%= @event.organizer.name%></p>
+<p>Создано: <%= @event.organizer.name %></p>
 <h1><%= @event.title %></h1>
 <p><%= @event.description %></p>
 <p><%= @event.date.strftime("%d-%m-%Y %H:%M") %></p>
-<% if current_user != @event.organizer %>
-  <% if current_user.event_registrations.exists?(event: @event) %>
-    <%= button_to "Отменить регистрацию", event_event_registration_path(@event, current_user.event_registrations.find_by(event: @event)), method: :delete, class: "btn btn-danger" %>
+<% if user_signed_in? %>
+  <% if user_has_missing_information? %>
+    <p>Пожалуйста, заполните ваш профиль, чтобы зарегистрироваться на мероприятие.</p>
   <% else %>
-    <%= button_to "Записаться на мероприятие", event_event_registrations_path(@event), method: :post, class: "btn btn-primary" %>
+    <% if current_user != @event.organizer %>
+      <% if current_user.event_registrations.exists?(event: @event) %>
+        <%= button_to "Отменить регистрацию", event_event_registration_path(@event, current_user.event_registrations.find_by(event: @event)), method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <%= button_to "Записаться на мероприятие", event_event_registrations_path(@event), method: :post, class: "btn btn-primary" %>
+      <% end %>
+    <% else %>
+      <%= link_to 'редактировать', edit_event_path(@event) %>
+      <%= button_to 'удалить', @event, method: :delete, data: { confirm: 'Вы уверены?' } %>
+    <% end %>
   <% end %>
 <% else %>
-  <%= link_to 'редактировать', edit_event_path(@event) %>
-  <%= button_to 'удалить', @event, method: :delete, data: { confirm: 'Вы уверены?' } %>
+  <p>Пожалуйста, <%= link_to 'войдите', new_user_session_path %> или <%= link_to 'зарегистрируйтесь', new_user_registration_path %>, чтобы записаться на мероприятие.</p>
 <% end %>
+
 <h3>Зарегистрированные пользователи:</h3>
-<% if  @event.users.any?%>
+<% if @event.users.any? %>
   <% @event.users.each do |user| %>
     <%= user.name %>
   <% end %>

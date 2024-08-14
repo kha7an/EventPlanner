@@ -2,6 +2,9 @@ class EventsController < ApplicationController
 
   before_action :set_event, only: %i[ show edit update destroy ]
 
+  helper_method :user_has_missing_information?
+
+
   def index
     @events = Event.all
   end
@@ -46,5 +49,9 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description, :location, :date)
+  end
+
+  def user_has_missing_information?
+    current_user.name.blank? || current_user.surname.blank? || current_user.phone.blank? || current_user.age.blank?
   end
 end

@@ -8,5 +8,8 @@ Rails.application.routes.draw do
     resources :event_registrations, only: %i[create destroy]
   end
 
+  resources :users, only: [:show]
+
+
   root "events#index"
 end
