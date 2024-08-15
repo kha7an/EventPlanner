@@ -25,7 +25,7 @@
 <h3>Зарегистрированные пользователи:</h3>
 <% if @event.users.any? %>
   <% @event.users.each do |user| %>
-    <%= user.name %>
+    <%= user.name %><br>
   <% end %>
 <% else %>
   На это мероприятие пока никто не зарегистрировался.
