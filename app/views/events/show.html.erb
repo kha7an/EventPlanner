@@ -1,35 +1,47 @@
-<h2>Просмотр мероприятия</h2>
-<p>Создано: <%= @event.organizer.name %></p>
-<h1><%= @event.title %></h1>
-<p><%= @event.description %></p>
-<p><%= @event.date.strftime("%d-%m-%Y %H:%M") %></p>
-<% if user_signed_in? %>
-  <% if user_has_missing_information? %>
-    <p>Пожалуйста, заполните ваш профиль, чтобы зарегистрироваться на мероприятие.</p>
-  <% else %>
-    <% if current_user != @event.organizer %>
-      <% if current_user.event_registrations.exists?(event: @event) %>
-        <%= button_to "Отменить регистрацию", event_event_registration_path(@event, current_user.event_registrations.find_by(event: @event)), method: :delete, class: "btn btn-danger" %>
-      <% else %>
-        <%= button_to "Записаться на мероприятие", event_event_registrations_path(@event), method: :post, class: "btn btn-primary" %>
+<div class="container mx-auto p-6 max-w-4xl">
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2"><%= @event.title %></h1>
+    <p class="text-lg text-gray-700 mb-4"><%= @event.description %></p>
+
+    <div class="mb-4">
+      <h3 class="text-2xl font-semibold text-gray-800">Дата и время:</h3>
+      <p class="text-xl text-gray-600"><%= I18n.l(@event.date, format: :verbose) %></p>
+    </div>
+
+    <div class="mb-4">
+      <h3 class="text-2xl font-semibold text-gray-800">Стоимость:</h3>
+      <p class="text-xl text-green-600 font-bold"><%= number_to_currency(@event.price, unit: "₽", format: "%n %u") %></p>
+    </div>
+
+    <% if user_signed_in? %>
+      <% if current_user == @event.organizer %>
+        <div class="flex space-x-4">
+          <%= link_to 'Редактировать', edit_event_path(@event), class: "inline-flex items-center px-4 py-2 border border-blue-500 text-blue-500 font-semibold rounded hover:bg-blue-50" %>
+          <%= button_to 'Удалить', @event, method: :delete, data: { confirm: 'Вы уверены?' }, class: "inline-flex items-center px-4 py-2 border border-red-500 text-red-500 font-semibold rounded hover:bg-red-50", form_class: "inline-block" %>
+        </div>
       <% end %>
-    <% else %>
-      <%= link_to 'редактировать', edit_event_path(@event) %>
-      <%= button_to 'удалить', @event, method: :delete, data: { confirm: 'Вы уверены?' } %>
     <% end %>
-  <% end %>
-<% else %>
-  <p>Пожалуйста, <%= link_to 'войдите', new_user_session_path %> или <%= link_to 'зарегистрируйтесь', new_user_registration_path %>, чтобы записаться на мероприятие.</p>
-<% end %>
 
-<h3>Зарегистрированные пользователи:</h3>
-<% if @event.users.any? %>
-  <% @event.users.each do |user| %>
-    <%= user.name %><br>
-  <% end %>
-<% else %>
-  На это мероприятие пока никто не зарегистрировался.
-<% end %>
+    <div class="mt-8">
+      <h3 class="text-2xl font-semibold text-gray-800">Организатор:</h3>
+      <p class="text-lg text-gray-700"><%= @event.organizer.name %></p>
+    </div>
+  </div>
 
-<br>
-<%= link_to 'вернуться назад', events_path %>
+  <div class="bg-white shadow-md rounded-lg p-6 mt-8">
+    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Зарегистрированные пользователи:</h3>
+    <% if @event.users.any? %>
+      <ul>
+        <% @event.users.each do |user| %>
+          <li class="text-lg text-gray-700 mb-1"><%= user.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-600">На это мероприятие пока никто не зарегистрировался.</p>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-8">
+    <%= link_to 'Вернуться назад', events_path, class: "text-blue-500 hover:underline" %>
+  </div>
+</div>

@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :location, :date)
+    params.require(:event).permit(:title, :description, :location, :date, :price)
   end
 
   def user_has_missing_information?

@@ -17,6 +17,10 @@
     <%= f.label :"Дата_и_время_(по_МСК)" %><br>
     <%= f.datetime_select :date %>
   </div>
+  <div class="field">
+    <%= f.label :price, "Цена (руб.)" %><br>
+    <%= f.text_field :price, step: "25.0", min: "0.0" %>
+  </div>
   <div class="actions">
     <%= f.submit "Создать" %>
   </div>

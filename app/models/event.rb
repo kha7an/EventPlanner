@@ -9,5 +9,13 @@ class Event < ApplicationRecord
   validates :description, presence: true
   validates :location, presence: true
   validates :date, presence: true
+  validates :price, presence: true
+  validate :date_cannot_be_in_the_past
 
+
+  def date_cannot_be_in_the_past
+    if date.present? && date < DateTime.now
+      errors.add(:date, "не может быть в прошлом")
+    end
+  end
 end

@@ -12,4 +12,6 @@
  *
  *= require_tree .
  *= require_self
+ *= require flatpickr
  */
+@import "flatpickr/dist/flatpickr.min.css";

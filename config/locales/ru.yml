@@ -48,6 +48,8 @@ ru:
       default: "%d.%m.%Y"
       long: "%-d %B %Y"
       short: "%-d %b"
+      verbose: "Начало в %A, %e %B %Y г., %H:%M"
+
     month_names:
       -
       - января
@@ -274,4 +276,5 @@ ru:
       default: "%a, %d %b %Y, %H:%M:%S %z"
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
+      verbose: "Начало в %A, %e %B %Y г., %H:%M"
     pm: вечера
