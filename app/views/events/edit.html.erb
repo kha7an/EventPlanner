@@ -1,23 +1,45 @@
-<h2>Редактирование мероприятия</h2>
+<h1>Редактировать мероприятие</h1>
 
-<%= form_for @event do |f| %>
-  <div class="field">
-    <%= f.label :Название %><br>
-    <%= f.text_field :title %>
+<%= form_with(model: @event, local: true) do |form| %>
+  <% if @event.errors.any? %>
+    <div>
+      <h2>Ошибки:</h2>
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, 'Название' %><br>
+    <%= form.text_field :title %>
   </div>
-  <div class="field">
-    <%= f.label :Описание %><br>
-    <%= f.text_area :description %>
+
+  <div>
+    <%= form.label :description, 'Описание' %><br>
+    <%= form.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :Локация %><br>
-    <%= f.text_field :location %>
+
+  <div>
+    <%= form.label :location, 'Место' %><br>
+    <%= form.text_field :location %>
   </div>
-  <div class="field">
-    <%= f.label :"Дата_и_время_(по_МСК)" %><br>
-    <%= f.datetime_select :date %>
+
+  <div>
+    <%= form.label :date, 'Дата и время' %><br>
+    <%= form.datetime_select :date %>
   </div>
-  <div class="actions">
-    <%= f.submit "Обновить" %>
+
+  <div>
+    <%= form.label :price, 'Цена' %><br>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.submit 'Обновить мероприятие' %>
   </div>
 <% end %>
+
+<%= link_to 'Назад к списку', events_path %>

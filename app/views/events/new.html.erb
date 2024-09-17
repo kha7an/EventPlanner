@@ -1,27 +1,81 @@
-<h2>Создание мероприятия</h2>
+<!-- app/views/events/new.html.erb -->
+<h1 class="mb-4">Создать мероприятие</h1>
 
-<%= form_for @event do |f| %>
-  <div class="field">
-    <%= f.label :Название %><br>
-    <%= f.text_field :title %>
+<%= form_with(model: @event, local: true, html: { class: 'needs-validation', novalidate: true }) do |form| %>
+  <% if @event.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading">Ошибки:</h4>
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, 'Название', class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control', required: true %>
+    <div class="invalid-feedback">
+      Пожалуйста, введите название мероприятия.
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :Описание %><br>
-    <%= f.text_area :description %>
+
+  <div class="mb-3">
+    <%= form.label :description, 'Описание', class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-control', rows: 5, required: true %>
+    <div class="invalid-feedback">
+      Пожалуйста, введите описание мероприятия.
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :Локация %><br>
-    <%= f.text_field :location %>
+
+  <div class="mb-3">
+    <%= form.label :location, 'Место', class: 'form-label' %>
+    <%= form.text_field :location, class: 'form-control', required: true %>
+    <div class="invalid-feedback">
+      Пожалуйста, укажите место проведения.
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :"Дата_и_время_(по_МСК)" %><br>
-    <%= f.datetime_select :date %>
+
+  <div class="mb-3">
+    <%= form.label :date, 'Дата и время', class: 'form-label' %>
+    <%= form.datetime_select :date, class: 'form-select', required: true %>
+    <div class="invalid-feedback">
+      Пожалуйста, выберите дату и время.
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :price, "Цена (руб.)" %><br>
-    <%= f.text_field :price, step: "25.0", min: "0.0" %>
+
+  <div class="mb-3">
+    <%= form.label :price, 'Цена', class: 'form-label' %>
+    <%= form.number_field :price, class: 'form-control', step: 0.01, required: true %>
+    <div class="invalid-feedback">
+      Пожалуйста, укажите цену.
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit "Создать" %>
+
+  <div class="mb-3">
+    <%= form.label :image, 'Изображение', class: 'form-label' %>
+    <%= form.file_field :image, class: 'form-control' %>
   </div>
+
+  <%= form.submit 'Создать мероприятие', class: 'btn btn-success' %>
+  <%= link_to 'Назад к списку', events_path, class: 'btn btn-link' %>
 <% end %>
+
+<!-- Скрипт для валидации формы -->
+<script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>

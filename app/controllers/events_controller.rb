@@ -10,7 +10,10 @@ class EventsController < ApplicationController
   end
 
   def show
-
+    respond_to do |format|
+      format.html # стандартный шаблон show
+      format.js { render partial: 'events/event_modal' } # рендеринг частичного шаблона для модального окна
+    end
   end
 
   def create
@@ -40,6 +43,12 @@ class EventsController < ApplicationController
     @event.destroy
     redirect_to events_url, notice: "Мероприятие удалено"
   end
+
+  def modal
+    @event = Event.find(params[:id])
+    render partial: 'events/event_modal', locals: { event: @event }
+  end
+
 
   private
 

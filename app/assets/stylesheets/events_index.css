@@ -1,0 +1,162 @@
+/* Сброс стилей */
+
+
+/* Основные стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #b3a9b6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Основной контент */
+.main-content {
+    padding: 120px 40px 40px; /* Добавляем отступ сверху для хедера */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.events-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between; /* Добавляем равное расстояние между карточками */
+}
+
+.event-card {
+    background-color: #fff;
+    width: calc(25% - 30px); /* 25% ширины минус расстояние для 4 карточек */
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 400px;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+}
+
+.event-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-details {
+    padding: 20px;
+}
+
+.event-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.event-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.event-link:hover {
+    color: #4a90e2;
+}
+
+.event-description {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.event-meta {
+    font-size: 0.9em;
+    color: #999;
+}
+
+.event-meta p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.event-meta i {
+    margin-right: 8px;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    position: relative;
+    border-radius: 10px;
+}
+
+.modal-close {
+    color: #aaa;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #000;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 1200px) {
+    .event-card {
+        width: calc(33.33% - 30px); /* На экранах меньше 1200px будет 3 карточки в ряд */
+    }
+}
+
+@media (max-width: 768px) {
+    .event-card {
+        width: calc(50% - 20px); /* На экранах меньше 768px будет 2 карточки в ряд */
+    }
+
+    .header-title {
+        font-size: 2em; /* Уменьшение размера текста заголовка для малых экранов */
+    }
+
+    .main-content {
+        padding: 100px 20px; /* Корректировка отступов для малых экранов */
+    }
+}
+
+@media (max-width: 480px) {
+    .event-card {
+        width: 100%; /* На маленьких экранах будет 1 карточка в ряд */
+    }
+
+    .main-content {
+        padding: 80px 10px; /* Уменьшаем padding на маленьких экранах */
+    }
+}

@@ -1,0 +1,85 @@
+/* Устанавливаем глобальный шрифт для форм */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Контейнер формы */
+.devise-form-container {
+    max-width: 400px;
+    margin: 100px auto 50px auto;
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.devise-form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ff7e5f;
+}
+
+.devise-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.devise-form-container input[type="email"],
+.devise-form-container input[type="password"],
+.devise-form-container input[type="text"],
+.devise-form-container input[type="password_confirmation"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1em;
+}
+
+.devise-form-container input[type="submit"] {
+    width: 100%;
+    padding: 12px 25px;
+    font-size: 1em;
+    border: none;
+    border-radius: 30px;
+    background-color: #ff7e5f;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.devise-form-container input[type="submit"]:hover {
+    background-color: #ff7043;
+}
+
+.devise-form-container .links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.devise-form-container .links a {
+    color: #ff7e5f;
+    text-decoration: none;
+}
+
+.devise-form-container .links a:hover {
+    text-decoration: underline;
+}
+
+/* Обработка ошибок */
+#error_explanation {
+    color: #f44336;
+    margin-bottom: 20px;
+}
+
+#error_explanation h2 {
+    margin-bottom: 10px;
+}
+
+#error_explanation ul {
+    list-style: none;
+    padding: 0;
+}

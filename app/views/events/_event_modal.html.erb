@@ -1,0 +1,10 @@
+<div class="modal-event-details">
+  <h2><%= event.title %></h2>
+  <% if event.image.attached? %>
+    <%= image_tag event.image, alt: event.title, class: "modal-event-image" %>
+  <% end %>
+  <p><%= event.description %></p>
+  <p><strong>Место:</strong> <%= event.location %></p>
+  <p><strong>Дата:</strong> <%= l(event.date, format: :long) %></p>
+  <p><strong>Организатор:</strong> <%= event.organizer.email %></p>
+</div>

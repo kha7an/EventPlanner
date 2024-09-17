@@ -9,7 +9,6 @@ class Event < ApplicationRecord
   validates :description, presence: true
   validates :location, presence: true
   validates :date, presence: true
-  validates :price, presence: true
   validate :date_cannot_be_in_the_past
 
 
