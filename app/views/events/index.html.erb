@@ -14,25 +14,35 @@
 </head>
 <body>
 
-
 <main class="main-content">
+  <!-- Добавляем кнопку "Создать мероприятие" -->
+  <% if user_signed_in? %>
+    <div class="create-event-button">
+      <%= link_to 'Создать мероприятие', new_event_path, class: 'btn btn-create-event' %>
+    </div>
+  <% end %>
+
   <div class="events-grid">
     <% @events.each do |event| %>
       <div class="event-card" data-event-id="<%= event.id %>">
         <div class="event-image-container">
           <%# if event.image.attached? %>
-            <%#= image_tag event.image, class: "event-image", alt: event.title %>
+          <%#= image_tag event.image, class: "event-image", alt: event.title %>
           <%# else %>
-            <%#= image_tag 'placeholder.jpg', class: "event-image", alt: 'Placeholder Image' %>
+          <%#= image_tag 'placeholder.jpg', class: "event-image", alt: 'Placeholder Image' %>
           <%# end %>
         </div>
         <div class="event-details">
           <h2 class="event-title"><%= link_to event.title, event, class: "event-link" %></h2>
-          <p class="event-description"><%= truncate(event.description, length: 150) %></p>
           <div class="event-meta">
             <p><i class="fas fa-map-marker-alt"></i> <%= event.location %></p>
             <p><i class="fas fa-calendar-alt"></i> <%= l(event.date, format: :long) %></p>
             <p><i class="fas fa-user"></i> <%= event.organizer.email %></p>
+            <% if event.price.nil? || event.price == 0 %>
+              <p><i class="fas fa-dollar-sign"></i> Бесплатно</p>
+            <% else %>
+              <p><i class="fas fa-dollar-sign"></i> <%= event.price %> ₽</p>
+            <% end %>
           </div>
         </div>
       </div>

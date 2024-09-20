@@ -14,29 +14,37 @@ body {
 
 /* Основной контент */
 .main-content {
-    padding: 120px 40px 40px; /* Добавляем отступ сверху для хедера */
+    padding: 120px 40px 40px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center; /* Центрируем карточки */
+    gap: 30px; /* Пространство между карточками */
 }
 
 .events-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
-    justify-content: space-between; /* Добавляем равное расстояние между карточками */
+    justify-content: space-between;
 }
+
 
 .event-card {
     background-color: #fff;
-    width: calc(25% - 30px); /* 25% ширины минус расстояние для 4 карточек */
+    flex: 1 1 calc(25% - 30px); /* Карточка гибко подстраивается под размер */
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    height: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    min-width: 280px; /* Минимальная ширина карточки */
+    max-width: 320px; /* Максимальная ширина для карточек */
+    height: 400px; /* Фиксированная высота карточки */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 
 .event-card:hover {
     transform: translateY(-10px);
@@ -56,11 +64,20 @@ body {
 
 .event-details {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
 .event-title {
     font-size: 1.5em;
     margin-bottom: 10px;
+    height: 48px;
+    line-height: 1.2em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .event-link {
@@ -81,7 +98,11 @@ body {
 .event-meta {
     font-size: 0.9em;
     color: #999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Всегда на одном уровне */
 }
+
 
 .event-meta p {
     display: flex;
@@ -159,4 +180,29 @@ body {
     .main-content {
         padding: 80px 10px; /* Уменьшаем padding на маленьких экранах */
     }
+}
+/* Стили для кнопки "Создать мероприятие" */
+.create-event-button {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-create-event {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745; /* Зеленый цвет */
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-create-event:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
 }

@@ -6,10 +6,22 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_link_tag 'header', media: 'all' %>
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' %>
+
 </head>
 <body>
+
+<% if notice %>
+  <div class="alert alert-notice"><%= notice %></div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-alert"><%= alert %></div>
+<% end %>
+
 <header class="site-header">
   <div class="container">
     <div class="logo">
@@ -24,13 +36,24 @@
       <%= link_to 'Главная', root_path, class: 'nav-item' %>
       <% if user_signed_in? %>
         <%= link_to 'Мои мероприятия', events_path, class: 'nav-item' %>
-        <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'nav-item logout-button' %>
+
+        <div class="nav-item dropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> <%= current_user.name || 'Профиль' %> <i class="fas fa-caret-down"></i>
+          </a>
+
+          <div class="dropdown-content">
+            <%= link_to 'Профиль', edit_user_registration_path %>
+            <%= link_to 'Выйти', destroy_user_session_path, method: :delete %>
+          </div>
+        </div>
       <% else %>
-        <%= link_to 'Войти', user_session_path, class: 'nav-item' %>
+        <%= link_to 'Войти', new_user_session_path, class: 'nav-item' %>
       <% end %>
     </nav>
   </div>
 </header>
+
 
 <main class="main-content">
   <%= yield %>

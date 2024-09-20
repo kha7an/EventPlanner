@@ -1,6 +1,8 @@
 class EventRegistrationsController < ApplicationController
   before_action :set_event, only: %i[ create destroy ]
   before_action :authenticate_user!
+  before_action :ensure_profile_complete
+
 
   def create
     @registration = @event.event_registrations.build(user: current_user)
@@ -26,5 +28,11 @@ class EventRegistrationsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:event_id])
+  end
+
+  def ensure_profile_complete
+    unless current_user.profile_complete?
+      redirect_to edit_user_registration_path, alert: 'Пожалуйста, заполните профиль перед регистрацией на мероприятие.'
+    end
   end
 end

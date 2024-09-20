@@ -1,3 +1,7 @@
+
+//= require rails-ujs
+//= require turbolinks
+//= require_tree .
 document.addEventListener('DOMContentLoaded', () => {
     // Функциональность модального окна
     const modal = document.getElementById('event-modal');

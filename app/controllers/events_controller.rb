@@ -1,8 +1,7 @@
 class EventsController < ApplicationController
 
   before_action :set_event, only: %i[ show edit update destroy ]
-
-  helper_method :user_has_missing_information?
+  before_action :ensure_profile_complete, only: [:new, :create]
 
 
   def index
@@ -60,7 +59,9 @@ class EventsController < ApplicationController
     params.require(:event).permit(:title, :description, :location, :date, :price)
   end
 
-  def user_has_missing_information?
-    current_user.name.blank? || current_user.surname.blank? || current_user.phone.blank? || current_user.age.blank?
+  def ensure_profile_complete
+    unless current_user.profile_complete?
+      redirect_to edit_user_registration_path, alert: 'Пожалуйста, заполните профиль перед созданием мероприятия.'
+    end
   end
 end

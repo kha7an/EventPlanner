@@ -1,42 +1,64 @@
+<%= stylesheet_link_tag 'events_show', media: 'all' %>
 
 <main class="main-content">
-  <div class="event-hero">
-    <%# if @event.image.attached? %>
-      <%#= image_tag @event.image, class: 'event-image', alt: @event.title %>
-    <%# else %>
-      <%#= image_tag 'placeholder.jpg', class: 'event-image', alt: 'Placeholder Image' %>
-    <%# end %>
-    <div class="event-hero-content">
-      <h1 class="event-title"><%= @event.title %></h1>
-      <p class="event-date"><i class="fas fa-calendar-alt"></i> <%= l(@event.date, format: :long) %></p>
-      <p class="event-location"><i class="fas fa-map-marker-alt"></i> <%= @event.location %></p>
+  <!-- Новый заголовок мероприятия -->
+  <header class="event-header">
+    <div class="event-header-content">
+      <div class="event-header-overlay">
+        <h1 class="event-title"><%= @event.title %></h1>
+        <p class="event-date-location-price">
+          <span class="event-date"><i class="fas fa-calendar-alt"></i> <%= l(@event.date, format: :long) %></span>
+          <span class="event-location"><i class="fas fa-map-marker-alt"></i> <%= @event.location %></span>
+          <span class="event-price"><i class="fas fa-dollar-sign"></i> <%= @event.price %> ₽ </span>
+        </p>
+      </div>
     </div>
-  </div>
+  </header>
 
+  <!-- Контейнер с деталями мероприятия -->
   <div class="event-details-container">
+    <!-- Описание мероприятия -->
     <section class="event-description-section">
       <h2>Описание</h2>
       <p class="event-description"><%= @event.description %></p>
     </section>
 
+    <!-- Организатор мероприятия -->
     <section class="event-organizer-section">
       <h2>Организатор</h2>
-      <p><i class="fas fa-user"></i> <%= @event.organizer.email %></p>
+      <p><i class="fas fa-user"></i> <%= @event.organizer.name.presence || @event.organizer.email %></p>
     </section>
 
+    <!-- Зарегистрированные пользователи -->
+    <section class="event-registered-users-section">
+      <h2>Участники</h2>
+      <% if @event.users.any? %>
+        <ul class="registered-users-list">
+          <% @event.users.each do |user| %>
+            <li><i class="fas fa-user"></i> <%= user.name.presence || user.email %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>На это мероприятие пока никто не зарегистрировался.</p>
+      <% end %>
+    </section>
+
+    <!-- Кнопки действий -->
     <div class="event-actions">
       <% if user_signed_in? && current_user == @event.organizer %>
         <%= link_to 'Редактировать', edit_event_path(@event), class: 'btn btn-edit' %>
-        <%= link_to 'Удалить', @event, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-delete' %>
-      <% end %>
+        <%= button_to 'Удалить', @event, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-delete' %>
+        <%else %>
+        <% if user_signed_in? && @event.users.include?(current_user) %>
+          <%= button_to 'Отменить регистрацию', event_event_registration_path(@event, current_user.event_registrations.find_by(event_id: @event.id)), method: :delete, class: 'btn btn-cancel' %>
+        <% else %>
+          <%= button_to 'Записаться', event_event_registrations_path(@event), method: :post, class: 'btn btn-register' %>
+        <% end %>
+        <% end %>
 
-      <% if user_signed_in? && @event.users.include?(current_user) %>
-        <%= link_to 'Отменить регистрацию', event_event_registration_path(@event), method: :delete, class: 'btn btn-cancel' %>
-      <% else %>
-        <%= link_to 'Зарегистрироваться', event_event_registrations_path(event_id: @event.id), method: :post, class: 'btn btn-register' %>
-      <% end %>
     </div>
 
+    <!-- Ссылка "Назад к списку" -->
     <div class="back-link">
       <%= link_to 'Назад к списку', events_path, class: 'btn btn-back' %>
     </div>
