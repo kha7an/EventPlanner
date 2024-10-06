@@ -9,7 +9,7 @@
         <p class="event-date-location-price">
           <span class="event-date"><i class="fas fa-calendar-alt"></i> <%= l(@event.date, format: :long) %></span>
           <span class="event-location"><i class="fas fa-map-marker-alt"></i> <%= @event.location %></span>
-          <span class="event-price"><i class="fas fa-dollar-sign"></i> <%= @event.price %> ₽ </span>
+          <span class="event-price"><i class="fas fa-dollar-sign"></i> <%= @event.price.presence || 0 %> ₽ </span>
         </p>
       </div>
     </div>
@@ -26,7 +26,9 @@
     <!-- Организатор мероприятия -->
     <section class="event-organizer-section">
       <h2>Организатор</h2>
-      <p><i class="fas fa-user"></i> <%= @event.organizer.name.presence || @event.organizer.email %></p>
+      <p><i class="fas fa-user"></i>
+        <%= link_to (@event.organizer.name.presence || @event.organizer.email), user_events_path(@event.organizer) %>
+      </p>
     </section>
 
     <!-- Зарегистрированные пользователи -->
@@ -35,7 +37,8 @@
       <% if @event.users.any? %>
         <ul class="registered-users-list">
           <% @event.users.each do |user| %>
-            <li><i class="fas fa-user"></i> <%= user.name.presence || user.email %></li>
+            <li><i class="fas fa-user"></i>   <%= link_to (user.name.presence || user.email), user_events_path(user), class: 'user-link' %>
+            </li>
           <% end %>
         </ul>
       <% else %>

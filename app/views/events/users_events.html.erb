@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Мероприятия пользователя</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'events_index', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+
+  <!-- Подключение Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+<% if current_user.id == @user.id %>
+  <h1 class="header-title" style="color: #434343">Мероприятия, которые вы организовали</h1>
+<% else %>
+  <h1 class="header-title" style="color: #434343">Мероприятия, которые организовал(а) <%= @user.name %></h1>
+<% end %>  <main class="main-content">
+    <div class="events-grid">
+      <% if @events.any? %>
+        <% @events.each do |event| %>
+          <div class="event-card" data-event-id="<%= event.id %>">
+            <div class="event-details">
+              <h2 class="event-title"><%= link_to event.title, event, class: "event-link" %></h2>
+              <div class="event-meta">
+                <p><i class="fas fa-map-marker-alt"></i> <%= event.location %></p>
+                <p><i class="fas fa-calendar-alt"></i> <%= l(event.date, format: :long) %></p>
+                <p><i class="fas fa-user"></i>  <%= event.organizer.email %></p>
+                <% if event.price.nil? || event.price == 0 %>
+                  <p><i class="fas fa-dollar-sign"></i> Бесплатно</p>
+                <% else %>
+                  <p><i class="fas fa-dollar-sign"></i> <%= event.price %> ₽</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>Пока пусто(</p>
+      <% end %>
+    </div>
+  </main>
+
+<!-- Модальное окно -->
+<div id="event-modal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <div id="modal-body">
+      <!-- Контент мероприятия будет загружаться сюда -->
+    </div>
+  </div>
+</div>
+</body>
+</html>

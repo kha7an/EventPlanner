@@ -2,38 +2,43 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Мероприятия</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
+  <!-- Подключение стилей -->
   <%= stylesheet_link_tag 'events_index', media: 'all' %>
   <%= javascript_include_tag 'application' %>
 
-  <!-- Подключение Font Awesome -->
+  <!-- Подключение Font Awesome для иконок -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
 
 <main class="main-content">
-  <!-- Добавляем кнопку "Создать мероприятие" -->
+  <!-- Кнопка "Создать мероприятие" -->
   <% if user_signed_in? %>
     <div class="create-event-button">
       <%= link_to 'Создать мероприятие', new_event_path, class: 'btn btn-create-event' %>
     </div>
   <% end %>
 
+  <!-- Сетка мероприятий -->
   <div class="events-grid">
     <% @events.each do |event| %>
       <div class="event-card" data-event-id="<%= event.id %>">
-        <div class="event-image-container">
+<!--        <div class="event-image-container">-->
           <%# if event.image.attached? %>
-          <%#= image_tag event.image, class: "event-image", alt: event.title %>
+            <%#= image_tag event.image, class: 'event-image', alt: event.title %>
           <%# else %>
-          <%#= image_tag 'placeholder.jpg', class: "event-image", alt: 'Placeholder Image' %>
+            <%#= image_tag 'placeholder.jpg', class: 'event-image', alt: 'Placeholder Image' %>
           <%# end %>
-        </div>
+<!--        </div>-->
         <div class="event-details">
-          <h2 class="event-title"><%= link_to event.title, event, class: "event-link" %></h2>
+          <h2 class="event-title">
+            <%= link_to event.title, event, class: 'event-link' %>
+          </h2>
           <div class="event-meta">
             <p><i class="fas fa-map-marker-alt"></i> <%= event.location %></p>
             <p><i class="fas fa-calendar-alt"></i> <%= l(event.date, format: :long) %></p>
@@ -55,9 +60,10 @@
   <div class="modal-content">
     <span class="modal-close">&times;</span>
     <div id="modal-body">
-      <!-- Контент мероприятия будет загружаться сюда -->
+      <!-- Динамическое содержимое мероприятия -->
     </div>
   </div>
 </div>
+
 </body>
 </html>

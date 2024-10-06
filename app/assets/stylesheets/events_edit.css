@@ -1,0 +1,113 @@
+/* Общие стили для заголовка */
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #4a90e2;
+    margin-bottom: 20px;
+}
+
+/* Стили для формы */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Стили для ошибок */
+form div > ul {
+    color: #dc3545; /* Красный для ошибок */
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+form div > ul li {
+    font-size: 0.9em;
+}
+
+/* Поля формы */
+form div {
+    margin-bottom: 20px;
+}
+
+form label {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form textarea:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+form textarea {
+    min-height: 120px;
+}
+
+/* Поле для выбора даты */
+form select {
+    padding: 10px;
+    font-size: 1.1em;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
+}
+
+form select:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* Кнопка отправки */
+form input[type="submit"] {
+    background-color: #4a90e2;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    text-transform: uppercase;
+}
+
+form input[type="submit"]:hover {
+    background-color: #357ABD;
+    transform: translateY(-3px);
+}
+
+/* Ссылка "Назад к списку" */
+form + a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+form + a:hover {
+    text-decoration: underline;
+}

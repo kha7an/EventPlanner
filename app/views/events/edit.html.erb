@@ -1,4 +1,5 @@
 <h1>Редактировать мероприятие</h1>
+<%= stylesheet_link_tag 'events_edit', media: 'all' %>
 
 <%= form_with(model: @event, local: true) do |form| %>
   <% if @event.errors.any? %>

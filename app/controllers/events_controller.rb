@@ -48,6 +48,11 @@ class EventsController < ApplicationController
     render partial: 'events/event_modal', locals: { event: @event }
   end
 
+  def users_events
+    @user = User.find(params[:user_id])
+    @events = @user.organized_events
+  end
+
 
   private
 

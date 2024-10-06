@@ -1,59 +1,74 @@
 /* Сброс стилей */
-
-
-/* Основные стили */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #b3a9b6;
-    color: #333;
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+/* Заголовок */
+.header {
+    background-color: #4a90e2;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 3em;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
 
 /* Основной контент */
 .main-content {
-    padding: 120px 40px 40px;
+    padding: 80px 40px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Центрируем карточки */
-    gap: 30px; /* Пространство между карточками */
+    justify-content: center;
+    gap: 40px;
 }
 
 .events-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px;
     justify-content: space-between;
 }
 
-
 .event-card {
     background-color: #fff;
-    flex: 1 1 calc(25% - 30px); /* Карточка гибко подстраивается под размер */
-    border-radius: 10px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(25% - 40px);
+    min-width: 300px;
+    max-width: 350px;
     overflow: hidden;
-    transition: transform 0.3s;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    min-width: 280px; /* Минимальная ширина карточки */
-    max-width: 320px; /* Максимальная ширина для карточек */
-    height: 400px; /* Фиксированная высота карточки */
+    min-height: 350px; /* Минимальная высота карточки */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-
 .event-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
 }
 
 .event-image-container {
     width: 100%;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
+    border-bottom: 3px solid #4a90e2;
 }
 
 .event-image {
@@ -64,54 +79,46 @@ body {
 
 .event-details {
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
 }
 
 .event-title {
     font-size: 1.5em;
     margin-bottom: 10px;
-    height: 48px;
-    line-height: 1.2em;
-    overflow: hidden;
+    text-align: center;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Обрезка длинного текста */
+    color: #4a90e2;
 }
 
 .event-link {
     text-decoration: none;
-    color: #333;
+    color: #4a90e2;
+    font-weight: bold;
 }
 
 .event-link:hover {
-    color: #4a90e2;
-}
-
-.event-description {
-    font-size: 1em;
-    margin-bottom: 20px;
-    color: #666;
+    color: #337ab7;
 }
 
 .event-meta {
-    font-size: 0.9em;
-    color: #999;
+    font-size: 1em;
+    color: #666;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Всегда на одном уровне */
+    flex-direction: column-reverse;
+    gap: 10px;
+    text-align: center;
+    flex-grow: 1;
 }
-
 
 .event-meta p {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    justify-content: center;
 }
 
 .event-meta i {
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 /* Модальное окно */
@@ -123,17 +130,16 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content {
     background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    width: 80%;
-    position: relative;
+    margin: 5% auto;
+    padding: 40px;
+    width: 60%;
     border-radius: 10px;
+    position: relative;
 }
 
 .modal-close {
@@ -142,67 +148,64 @@ body {
     right: 20px;
     top: 20px;
     font-size: 30px;
-    font-weight: bold;
     cursor: pointer;
 }
 
-.modal-close:hover,
-.modal-close:focus {
+.modal-close:hover {
     color: #000;
+}
+
+/* Кнопка "Создать мероприятие" */
+.create-event-button {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.btn-create-event {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 50px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-create-event:hover {
+    background-color: #357ABD;
+    transform: translateY(-3px);
 }
 
 /* Адаптивный дизайн */
 @media (max-width: 1200px) {
     .event-card {
-        width: calc(33.33% - 30px); /* На экранах меньше 1200px будет 3 карточки в ряд */
+        width: calc(33.33% - 40px);
     }
 }
 
 @media (max-width: 768px) {
     .event-card {
-        width: calc(50% - 20px); /* На экранах меньше 768px будет 2 карточки в ряд */
+        width: calc(50% - 30px);
     }
 
     .header-title {
-        font-size: 2em; /* Уменьшение размера текста заголовка для малых экранов */
+        font-size: 2.5em;
     }
 
     .main-content {
-        padding: 100px 20px; /* Корректировка отступов для малых экранов */
+        padding: 60px 20px;
     }
 }
 
 @media (max-width: 480px) {
     .event-card {
-        width: 100%; /* На маленьких экранах будет 1 карточка в ряд */
+        width: 100%;
     }
 
     .main-content {
-        padding: 80px 10px; /* Уменьшаем padding на маленьких экранах */
+        padding: 50px 10px;
     }
-}
-/* Стили для кнопки "Создать мероприятие" */
-.create-event-button {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.btn-create-event {
-    display: inline-block;
-    padding: 12px 30px;
-    font-size: 1em;
-    font-weight: bold;
-    color: #fff;
-    background-color: #28a745; /* Зеленый цвет */
-    border: none;
-    border-radius: 25px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    text-transform: uppercase;
-}
-
-.btn-create-event:hover {
-    background-color: #218838;
-    transform: translateY(-3px);
 }

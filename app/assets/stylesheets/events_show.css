@@ -4,9 +4,10 @@
 /* Устанавливаем глобальные стили */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f0f2f5; /* Синхронизируем фон с индексом */
     color: #333;
     margin: 0;
+    line-height: 1.6; /* Улучшаем читаемость */
 }
 
 .main-content {
@@ -18,7 +19,7 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
-    background-color: #333; /* Фон на случай отсутствия изображения */
+    background-color: #4a90e2; /* Применяем синий цвет */
 }
 
 .event-header-overlay {
@@ -26,11 +27,13 @@ body {
     padding: 40px 20px;
     text-align: center;
     color: #fff;
+    background: rgba(0, 0, 0, 0.4); /* Полупрозрачный черный фон для лучшей читаемости текста */
 }
 
 .event-title {
-    font-size: 2.5em;
+    font-size: 3em;
     margin-bottom: 15px;
+    color: #fff; /* Белый цвет заголовка для контраста */
 }
 
 .event-date-location-price {
@@ -61,8 +64,8 @@ body {
 .event-registered-users-section {
     background-color: #fff;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 15px; /* Соответствует карточкам событий */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 .event-description-section h2,
@@ -70,7 +73,7 @@ body {
 .event-registered-users-section h2 {
     font-size: 1.8em;
     margin-bottom: 15px;
-    color: #ff7e5f;
+    color: #4a90e2; /* Применяем синий цвет */
     position: relative;
 }
 
@@ -83,12 +86,12 @@ body {
     bottom: -8px;
     width: 50px;
     height: 4px;
-    background-color: #ff7e5f;
+    background-color: #4a90e2; /* Синий цвет для акцентов */
 }
 
 .event-description {
     font-size: 1.1em;
-    line-height: 1.6;
+    line-height: 1.8;
     color: #555;
 }
 
@@ -103,7 +106,7 @@ body {
 .event-organizer-section i,
 .registered-users-list li i {
     margin-right: 10px;
-    color: #ff7e5f;
+    color: #4a90e2; /* Применяем синий цвет */
 }
 
 .registered-users-list {
@@ -115,57 +118,40 @@ body {
 /* Улучшаем стиль кнопок */
 .btn {
     display: inline-block;
-    padding: 12px 30px;
-    font-size: 1em;
+    padding: 15px 35px;
+    font-size: 1.1em;
     font-weight: bold;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px; /* Соответствует стилю кнопок на индексе */
     color: #fff;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     text-align: center;
     margin: 10px;
     text-transform: uppercase;
+    background-color: #4a90e2; /* Применяем синий цвет */
 }
 
-/* Стиль при наведении */
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    background-color: #357ABD; /* Цвет при наведении */
+    transform: translateY(-3px); /* Применяем одинаковое поведение */
 }
 
-/* Разные типы кнопок с новыми цветами */
 .btn-edit {
     background-color: #007bff; /* Синий цвет */
-}
-
-.btn-edit:hover {
-    background-color: #0056b3;
 }
 
 .btn-delete {
     background-color: #dc3545; /* Красный цвет */
 }
 
-.btn-delete:hover {
-    background-color: #c82333;
-}
-
 .btn-register {
     background-color: #28a745; /* Зеленый цвет */
-}
-
-.btn-register:hover {
-    background-color: #218838;
 }
 
 .btn-cancel {
     background-color: #ffc107; /* Желтый цвет */
     color: #212529;
-}
-
-.btn-cancel:hover {
-    background-color: #e0a800;
 }
 
 .btn-back {
@@ -203,7 +189,7 @@ body {
 
 @media (max-width: 768px) {
     .event-title {
-        font-size: 2em;
+        font-size: 2.5em;
     }
 
     .event-description-section,
@@ -213,18 +199,18 @@ body {
     }
 
     .btn {
-        padding: 10px 20px;
-        font-size: 0.9em;
+        padding: 12px 20px;
+        font-size: 0.95em;
     }
 }
 
 @media (max-width: 576px) {
     .event-title {
-        font-size: 1.8em;
+        font-size: 2em;
     }
 
     .btn {
-        padding: 8px 15px;
+        padding: 10px 18px;
         font-size: 0.85em;
     }
 }

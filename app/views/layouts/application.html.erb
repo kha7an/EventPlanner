@@ -35,7 +35,7 @@
     <nav class="nav-links">
       <%= link_to 'Главная', root_path, class: 'nav-item' %>
       <% if user_signed_in? %>
-        <%= link_to 'Мои мероприятия', events_path, class: 'nav-item' %>
+        <%= link_to 'Мои мероприятия', user_events_path(current_user), class: 'nav-item' %>
 
         <div class="nav-item dropdown">
           <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
